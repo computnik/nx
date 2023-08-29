@@ -1,5 +1,5 @@
 import { ExecutorContext } from '@nx/devkit';
-import { Configuration } from 'webpack';
+import { Configuration, WebpackOptionsNormalized } from 'webpack';
 
 import { NormalizedWebpackExecutorOptions } from '../executors/webpack/schema';
 import { withNx } from './with-nx';
@@ -21,12 +21,12 @@ export interface NxWebpackExecutionContext {
 }
 
 export interface NxWebpackPlugin {
-  (config: Configuration, ctx: NxWebpackExecutionContext): Configuration;
+  (config: WebpackOptionsNormalized, ctx: NxWebpackExecutionContext): WebpackOptionsNormalized;
 }
 export interface AsyncNxWebpackPlugin {
-  (config: Configuration, ctx: NxWebpackExecutionContext):
-    | Configuration
-    | Promise<Configuration>;
+  (config: Configuration | WebpackOptionsNormalized, ctx: NxWebpackExecutionContext):
+    | WebpackOptionsNormalized
+    | Promise<WebpackOptionsNormalized>;
 }
 
 export function composePlugins(
